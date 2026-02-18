@@ -25,19 +25,44 @@
   https://docs.arduino.cc/built-in-examples/basics/Blink/
 */
 
-// the setup function runs once when you press reset or power the board
+int buzzer = 11;
+
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(buzzer, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(9, OUTPUT);
 }
 
-// the loop function runs over and over again forever
 void loop() {
-  digitalWrite(10, HIGH);  // turn the LED on (HIGH is the voltage level)
-  delay(500);                      // wait for a second
-  digitalWrite(10, LOW);   // turn the LED off by making the voltage LOW
-    digitalWrite(9, HIGH);  // turn the LED on (HIGH is the voltage level)
-  delay(500);                      // wait for a second
-  digitalWrite(9, LOW);   // turn the LED off by making the voltage LOW
+
+  // Siren going up (lower pitch range)
+  for (int freq = 400; freq <= 900; freq += 8) {
+
+    tone(buzzer, freq);
+
+    digitalWrite(10, HIGH);
+    digitalWrite(9, LOW);
+    delay(40);
+
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    delay(40);
+  }
+
+  // Siren going down
+  for (int freq = 900; freq >= 400; freq -= 8) {
+
+    tone(buzzer, freq);
+
+    digitalWrite(10, HIGH);
+    digitalWrite(9, LOW);
+    delay(40);
+
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    delay(40);
+  }
 }
+
+
+
